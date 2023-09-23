@@ -3,28 +3,28 @@
 //     •  ) в определенный
 //     элемент в вашем HTML-документе.
 
-// const arrayString = [
-//   "Создайте",
-//   "функцию ",
-//   "которая",
-//   "принимает",
-//   "массив",
-//   "строк",
-// ];
+const arrayString = [
+  "Создайте",
+  "функцию ",
+  "которая",
+  "принимает",
+  "массив",
+  "строк",
+];
 
-// function getArray(arr) {
-//   const newUl = document.createElement("ul");
+function getArray(arr) {
+  const newUl = document.createElement("ul");
 
-//   arr.forEach(function (item) {
-//     const newLi = document.createElement("li");
-//     newLi.textContent = item;
-//     newUl.append(newLi);
-//   });
-//   const list = document.getElementById("list");
-//   list.append(newUl);
-// }
+  arr.forEach(function (item) {
+    const newLi = document.createElement("li");
+    newLi.textContent = item;
+    newUl.append(newLi);
+  });
+  const list = document.getElementById("list");
+  list.append(newUl);
+}
 
-// getArray(arrayString)
+getArray(arrayString)
 
 // Задача 2: Изменение стилей элементов
 // Создайте функцию,

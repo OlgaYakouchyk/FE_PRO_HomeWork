@@ -8,5 +8,5 @@ ul, li{
 }
 ul li{
     height: 50px;
-    background-color: blue;
+    /* background-color: blue; */
 }
