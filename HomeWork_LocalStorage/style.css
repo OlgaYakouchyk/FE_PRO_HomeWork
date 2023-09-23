@@ -1,0 +1,66 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+  }
+  .buttonSibmit {
+    padding: 10px 25px;
+    background-color: rgb(68, 219, 219);
+    box-shadow: 0 0 10px magenta;
+    border: 1px solid rgb(4, 42, 42);
+    margin: 10px 0;
+    border-radius: 8px;
+  }
+  .buttonSibmit:hover{
+    background-color: blue;
+    box-shadow: 0 0  10px yellow;
+    color: white;
+
+  }
+
+  #productList {
+    max-width: 70%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    list-style: none;
+  }
+  #productList li {
+    padding: 10px 25px;
+    border: 1px solid teal;
+    border-radius: 8px;
+    min-width: 100px;
+    text-align: center;
+  }
+  input {
+    padding: 10px 0;
+    background: transparent;
+    border: 1px solid teal;
+    outline: none;
+  }
+  
+  #productName{
+      color: white;
+      background-color: mediumslateblue;
+  }
+
+  #productName:hover{
+    background-color: red;
+
+  }
+
+  #productPrice{
+      color: rgb(191, 237, 191);
+      background-color: rgb(11, 80, 11);
+  }
+  #searchInput{
+    color: black;
+    background-color: aquamarine;
+  }
+
+  #productCount{
+    background-color: yellow;
+  }
+  
