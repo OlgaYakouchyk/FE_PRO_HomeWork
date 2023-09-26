@@ -70,28 +70,73 @@ postNewUsers(newDate2, (userData) => {
 //  Ответ сервера вывести в консоль.
 
 function postNewPosts(newData, callback) {
-    fetch("https://jsonplaceholder.typicode.com/posts", {
-      method: "POST",
-      body: JSON.stringify(newData),
-      headers: { "Content-type": "application/json; charset=UTF-8" },
+  fetch("https://jsonplaceholder.typicode.com/posts", {
+    method: "POST",
+    body: JSON.stringify(newData),
+    headers: { "Content-type": "application/json; charset=UTF-8" },
+  })
+    .then((response) => {
+      return response.json();
     })
-      .then((response) => {
-        return response.json();
-      })
-      .then((data) => {
-        callback(data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }
+    .then((data) => {
+      callback(data);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+}
 
 const newForm = { title: "UBody", body: "This is a new body", userId: 1 };
-postNewPosts(newForm, (userData)=>{
-    console.log('NEW POSTS: ', userData);
-})
+postNewPosts(newForm, (userData) => {
+  console.log("NEW POSTS: ", userData);
+});
 
-// Создать функцию, которая генерирует карточку с постом 
+// Создать функцию, которая генерирует карточку с постом
 // и использовать ее для отображения данных, пришедших с сервера.
-// В качестве запроса на сервер используйте результат прошлого задания. 
+// В качестве запроса на сервер используйте результат прошлого задания.
+
+const arrayPosts = []; 
+
+
+function getPostUsers(userId, callback) {
+  fetch(`https://jsonplaceholder.typicode.com/posts/${userId}`)
+    .then((response) => {
+      return response.json();
+    })
+    .then((data) => {
+      const userPost = { userId, data };
+      arrayPosts.push(userPost)
+      callback(userPost);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+}
+
+function createUserPost(postData) {
+  const postCard = document.querySelector('.postCard')
+  const postTitle = document.createElement("h2");
+  postTitle.textContent = postData.data.title;
+  const postText = document.createElement("p");
+  postText.textContent = postData.data.body;
+
+  postCard.appendChild(postTitle);
+  postCard.appendChild(postText)
+
+ return postCard;
+}
+
+
+
+getPostUsers(3, () => {
+  arrayPosts.forEach((postData)=>{
+    const cardPost = createUserPost(postData);
+    postCard.appendChild(cardPost)
+
+  }) 
+ 
+});
+
+
+
 
