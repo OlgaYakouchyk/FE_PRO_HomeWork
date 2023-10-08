@@ -66,7 +66,8 @@ postNewUsers(newDate2, (userData) => {
   console.log("This is a new user date: ", userData);
 });
 
-// Задача. 3. Создать форму в интерфейсе, которая принимает title, body и userId и с этими данными отправляет запрос на сервер. Запрос можно взять из прошлого примера.
+// Задача. 3. Создать форму в интерфейсе, которая принимает title,
+//  body и userId и с этими данными отправляет запрос на сервер. Запрос можно взять из прошлого примера.
 //  Ответ сервера вывести в консоль.
 
 function postNewPosts(newData, callback) {
@@ -95,47 +96,108 @@ postNewPosts(newForm, (userData) => {
 // и использовать ее для отображения данных, пришедших с сервера.
 // В качестве запроса на сервер используйте результат прошлого задания.
 
-const arrayPosts = []; 
+// const arrayPosts = []; 
 
+
+// function getPostUsers(userId, callback) {
+//   fetch(`https://jsonplaceholder.typicode.com/posts/${userId}`)
+//     .then((response) => {
+//       return response.json();
+//     })
+//     .then((data) => {
+//       const userPost = { userId, data };
+//       arrayPosts.push(userPost)
+//       callback(userPost);
+//     })
+//     .catch((error) => {
+//       console.log(error);
+//     });
+// }
+
+// function createUserPost(postData) {
+//   const postCard = document.querySelector('.postCard')
+//   const postTitle = document.createElement("h2");
+//   postTitle.textContent = postData.data.title;
+//   const postText = document.createElement("p");
+//   postText.textContent = postData.data.body;
+
+//   postCard.appendChild(postTitle);
+//   postCard.appendChild(postText)
+
+//  return postCard;
+// }
+
+
+
+// getPostUsers(67, () => {
+//   arrayPosts.forEach((postData)=>{
+//     const cardPost = createUserPost(postData);
+//     postCard.appendChild(cardPost)
+
+//   }) 
+ 
+// });
+
+
+
+const arrayPosts = [];
+
+// Функция для создания и добавления контейнера пользователя на страницу
+function createUserContainer(userId) {
+  const userContainer = document.createElement("div");
+  userContainer.classList.add(`userContainer-${userId}`);
+  document.body.appendChild(userContainer);
+  return userContainer;
+}
 
 function getPostUsers(userId, callback) {
-  fetch(`https://jsonplaceholder.typicode.com/posts/${userId}`)
-    .then((response) => {
-      return response.json();
-    })
+  fetch(`https://jsonplaceholder.typicode.com/posts?userId=${userId}`)
+    .then((response) => response.json())
     .then((data) => {
-      const userPost = { userId, data };
-      arrayPosts.push(userPost)
-      callback(userPost);
+      arrayPosts.push(...data);
+      callback(data);
     })
     .catch((error) => {
       console.log(error);
     });
 }
-
-function createUserPost(postData) {
-  const postCard = document.querySelector('.postCard')
+function createUserPost(postData, container) {
+  const postCard = document.createElement("div");
+  postCard.classList.add("postCard");
   const postTitle = document.createElement("h2");
-  postTitle.textContent = postData.data.title;
+  postTitle.textContent = postData.title;
   const postText = document.createElement("p");
-  postText.textContent = postData.data.body;
+  postText.textContent = postData.body;
 
   postCard.appendChild(postTitle);
-  postCard.appendChild(postText)
+  postCard.appendChild(postText);
 
- return postCard;
+  container.appendChild(postCard);
 }
 
-
-
-getPostUsers(3, () => {
-  arrayPosts.forEach((postData)=>{
-    const cardPost = createUserPost(postData);
-    postCard.appendChild(cardPost)
-
-  }) 
- 
+// Вызываем функцию createUserContainer для создания контейнеров
+const user8Container = createUserContainer(8);
+const user4Container = createUserContainer(4);
+const user2Container = createUserContainer(2);
+getPostUsers(8, (postData) => {
+  postData.forEach((post) => {
+    createUserPost(post, user8Container);
+  });
 });
+
+getPostUsers(4, (postData) => {
+  postData.forEach((post) => {
+    createUserPost(post, user4Container);
+  });
+});
+
+getPostUsers(2, (postData) => {
+    postData.forEach((post) => {
+      createUserPost(post, user2Container);
+    });
+  });
+
+console.log(arrayPosts);
 
 
 

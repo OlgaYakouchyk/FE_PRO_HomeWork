@@ -1,0 +1,32 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+#postIdForm{
+    margin: 20px;
+}
+
+#postId{
+    background-color: aqua;
+}
+
+button{
+    background-color: rgb(153, 94, 208);
+   
+}
+
+button:hover{
+    background-color: rgb(232, 65, 182);
+}
+
+li{
+    border: 2px solid rgb(49, 210, 68);
+    border-radius: 10px;
+    margin: 10px;
+    
+}
+ul{
+    margin: 10px 10px;
+}
