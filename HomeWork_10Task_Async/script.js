@@ -9,7 +9,7 @@ async function getFethUser() {
       throw new Error("The fetch request was not successful");
     }
     const dataUser = await respont.json();
-    console.log(dataUser);
+    console.log('Task 1:', dataUser);
   } catch (error) {
     console.error(error.message, "Error");
   }
@@ -38,7 +38,7 @@ function getFethUser2() {
 
 getFethUser2()
   .then((data) => {
-    console.log(data);
+    console.log("Task 2:", data);
   })
   .catch((error) => {
     console.error(error.message, "Error");
@@ -55,7 +55,7 @@ async function getFethPost(id) {
       throw new Error("The fetch request was not successful");
     }
     const dataUser = await respont.json();
-    console.log(dataUser);
+    console.log("Task 3:", dataUser);
   } catch (error) {
     console.error(error.message, "Error");
   }
@@ -84,7 +84,7 @@ function getFethPostModificate(id) {
 
 getFethPostModificate(7)
   .then((data) => {
-    console.log(data);
+    console.log("Task 4:", data);
   })
   .catch((error) => {
     console.error(error.message, "Error");
@@ -107,7 +107,7 @@ function newPost(newData) {
     headers: { "Content-type": "application/json; charset=UTF-8" },
   })
     .then((response) => response.json())
-    .then((data) => console.log(data));
+    .then((data) => console.log("Task 5:", data));
 }
 newPost(newData);
 
@@ -115,7 +115,7 @@ newPost(newData);
 // 6. Модифицируйте предыдущую функцию так, чтобы она принимала 
 // параметры (заголовок, текст) для создания поста и возвращала Promise с созданным постом.
 
-function newPost2(title, body) {
+async function newPost2(title, body) {
 return new Promise(async(resolve, reject) => {
     const url = `https://jsonplaceholder.typicode.com/posts?title = ${title}&body = ${body}`
     try {
@@ -129,7 +129,7 @@ return new Promise(async(resolve, reject) => {
             throw new Error ("The fetch request was not successful")
         }
         const dataPost = await response.json()
-        resolve(dataPost)
+        resolve( dataPost)
     } catch (error) {
         reject(error.message, "Error")
     }
@@ -139,7 +139,7 @@ return new Promise(async(resolve, reject) => {
   }
   newPost2('Routes', 'All HTTP methods are supported. You can use http or https for your requests.')
   .then((data) =>{
-    console.log(data)
+    console.log("Task 6:",data)
   })
   .catch(error=>{
     console.log(error);
@@ -148,3 +148,117 @@ return new Promise(async(resolve, reject) => {
 
 //   7. Создайте функцию, которая делает Fetch-запрос для обновления 
 //   существующего поста на JSON Placeholder API и выводит обновленный пост в консоль.
+
+
+const updatedData = {
+  title: "New TITLE",
+  body: "There is updated body!!!!"
+}
+
+async function getUpdatePost(id, updatedData) {
+  const url = `https://jsonplaceholder.typicode.com/posts/${id}`
+  try {
+    const response = await fetch(url,  {
+      method: "PUT",
+      body: JSON.stringify(updatedData),
+      headers: { "Content-type": "application/json; charset=UTF-8" },
+    })
+    if(!response.ok){
+      throw new Error ("The updated request was not successful")
+    }
+    const updatedPost = await response.json()
+    console.log("Task 7 -> There is your  updated post: ", updatedPost);
+    
+  } catch (error) {
+    console.error(error.message, 'You can NOT uptodate the post')
+    
+  }
+    
+}
+
+getUpdatePost(2, updatedData)
+
+
+// 8. Модифицируйте предыдущую функцию так, чтобы она принимала параметры 
+// (ID поста, новый заголовок, новый текст) для обновления поста и 
+// возвращала Promise с обновленным постом.
+
+async function getUpdatePostPromise (id, title, body){
+  return new Promise(async(resolve, reject) => {
+    const url = `https://jsonplaceholder.typicode.com/posts/${id}`
+    try {
+        const response = await fetch(url, {
+            method: "PUT",
+            body: JSON.stringify({id, title, body}),
+            headers: { "Content-type": "application/json; charset=UTF-8" },
+          }) 
+
+        if(!response.ok){
+            throw new Error ("The fetch request was not successful")
+        }
+        const dataPost = await response.json()
+        resolve(dataPost)
+    } catch (error) {
+        reject(error.message, "Error")
+    }
+    
+})
+}
+getUpdatePostPromise(3, 'New updated Title', 'There is your  updated post wich return Promise: ')
+.then(data =>{
+  console.log('Task 8:', data);
+})
+.catch(error =>{
+  console.log(error, 'You can NOT uptodate the post');
+})
+
+//9. Создайте функцию, которая делает Fetch-запрос для удаления существующего поста 
+// на JSON Placeholder API и выводит сообщение об успешном удалении в консоль.
+
+async function deleteCurrebtPost(id){
+  const url = `https://jsonplaceholder.typicode.com/posts/${id}`
+  try {
+    const response = await fetch(url,  {
+      method: "DELETE",
+    })
+    if(!response.ok){
+      throw new Error ('You fetch request to delete the post is NOT successful')
+    }
+    const data = await response.json()
+    console.log('Task 9: -> Your post DELETED successful', data);
+    
+  } catch (error) {
+    console.error(error.message, 'You can NOT delete the post')
+  }
+}
+
+deleteCurrebtPost(2)
+
+//10. Модифицируйте предыдущую функцию так, 
+// чтобы она принимала параметр (ID поста) для удаления поста 
+// и возвращала Promise с сообщением об успешном удалении.
+
+function deletePostPromise(id){
+  return new Promise(async(resolve, reject) => {
+    const url = `https://jsonplaceholder.typicode.com/posts/${id}`
+    try {
+      const response = await fetch(url,  {
+        method: "DELETE",
+      })
+      if(!response.ok){
+        throw new Error ('You fetch request to delete the post is NOT successful')
+      }
+      const data = await response.json()
+      resolve(data);
+    } catch (error) {
+      reject(error.message, "ERROR")      
+    }
+  })
+}
+deletePostPromise(2)
+.then(data =>{
+  console.log('Task 10: -> Your post DELETED successful', data);
+})
+.catch(error =>{
+  console.log('You can NOT delete the post');
+})
