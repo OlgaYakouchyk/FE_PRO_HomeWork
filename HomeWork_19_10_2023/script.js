@@ -19,6 +19,8 @@
 // Задание 2.3. Создать статическое свойство items, которое хранит созданные экземпляры класса Product.
 // Задание 2.4. Добавить getter и setter для свойства price. При добавлении идет проверка, что цена больше 0.
 
+
+
 class Product {
   constructor(title, price, count) {
     this.title = title;
@@ -111,6 +113,9 @@ const item3 = Product.createProduct("Monitor", 150, 7);
 //   onsole.error(error.message, "No more items for sale")
 // }
 
+
+// TASK 2!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+//______________________________________________________
 function saveToLocalStorage(product) {
   localStorage.setItem("products", JSON.stringify(product));
 }
