@@ -1,0 +1,32 @@
+.btn{
+    background-color: transparent;
+}
+.S{
+    width: 130px;
+    padding: 8px;
+    border: 1px solid black;
+    background-color: blue;
+    color: white;
+}
+.M{
+    width: 150px;
+    padding: 8px;
+    border: 1px solid black;
+    background-color: aquamarine;
+}
+.L{
+    width: 180px;
+    padding: 8px;
+    border: 1px solid black;
+    background-color: pink;
+}
+.block_form{
+    width: 350px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    margin: 500px;
+
+    
+}
